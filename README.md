@@ -1,4 +1,4 @@
-# AWS Config Rules Workshop
+# Making Things Right With AWS Lambda and AWS Config Rules
 
 ![Config Rules RULES](/Images/Config-Header.png)
 
