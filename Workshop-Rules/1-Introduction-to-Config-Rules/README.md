@@ -33,30 +33,44 @@ Next we will enable AWS Config and create your first Config Rule so that this La
 If you have never used the AWS Config Service, you will first need to enable it within the region you're participating in.  Follow these steps to enable AWS Config (you can leave all settings as default): **http://docs.aws.amazon.com/config/latest/developerguide/gs-console.html**
 
 ## Creating a Config Rule
-1. On the AWS Config console home page, choose **Rules**, then **+Add Rule**.
+1. On the AWS Config console home page, choose **Rules**, then **+Add Rule**:
+![Add Rule](/Images/Add-Rule.png)
 
-2. Here, you'll see many available Config Rules that AWS has created and will manage for you, called Managed  Rules. For this workshop we will be creating Custom Rules.  Choose **+Custom Rule**.
+2. Here, you'll see many available Config Rules that AWS has created and will manage for you, called Managed  Rules. For this workshop we will be creating Custom Rules.  Choose **+Custom Rule**:
+![Add Rule](/Images/Add-Custom-Rule.png)
 
-3. Name your Config Rule something descriptive like, *SecurityGroupSSHWhitelistRule*, and give it a description.  
+3. Name your Config Rule something descriptive like, *SecurityGroupSSHWhitelistRule*, and give it a description.  For **Lambda Function ARN**, copy the ARN that is visible within the Lambda console for the Lambda function you created above, and paste the full ARN here. It should have the form of *arn:aws:lambda:aws-region-1:xxxxxxxxxxxx:function:FUNCTION_NAME*:
+![Add Rule](/Images/Rule-Basic-Config.png)
 
-4. For **Lambda Function ARN**, copy the ARN that is visible within the Lambda console for the Lambda function you created above, and paste the full ARN here. It should have the form of *arn:aws:lambda:aws-region-1:xxxxxxxxxxxx:function:FUNCTION_NAME*.
+4. Next, you have the option of either having this rule be evaluated as changes occur to AWS resources (*Configuration changes*) or on a schedule (*Periodic*).  For this workshop, all of the rules with be triggered by **Configuration changes**, so choose that option.  For configuration change triggered rules, you have the ability to scope event triggers to either resources of a particular type change (*Resources*), when any resources that share a specified tag change (*Tags*) or when AWS Config records the change of any resource (*Any*). For this workshop, our scope will be **Resources**.
+5. You then will select for which type of AWS resources should the configuration changes be sent to your Config rule for evaluation. This first module's rule evaluates Security Groups. So select **Security Groups**.  When writing your own rules in the future, you may not care to have your Config rule evaluate every single resource of a particular type. AWS Config allows you to specify a Resource identifier if you'd like the rule to only execute for that single resource, and not all others of the same type.  For this workshop, leave *Resource identifier* blank:
+![Add Rule](/Images/Rule-Trigger-Config.png)
 
-5. Next, you have the option of either having this rule be evaluated as changes occur to AWS resources (*Configuration changes*) or on a schedule (*Periodic*).  For this workshop, all of the rules with be triggered by **Configuration changes**, so choose that option.  For configuration change triggered rules, you have the ability to scope event triggers to either resources of a particular type change (*Resources*), when any resources that share a specified tag change (*Tags*) or when AWS Config records the change of any resource (*Any*). For this workshop, our scope will be **Resources**.
+6. AWS Config has the ability to pass configuration parameters to your Lambda function along with each invocation event.  They will arrive as key:value pairs within the event object as part of the *RuleParameters* attribute. For this first example rule, our Lambda function makes use of one parameter - **ipAddress**. This represents the single /32 IP address that as treated as the allowed IP address for SSH traffic to security groups in your account. So create one Rule parameter with the key **ipAddress** and a value of **1.1.1.1/32**. Keep in mind that the key name is case-sensitive:
+![Add Rule](/Images/Rule-Parameters.png)
 
-6. You then will select for which type of AWS resources should the configuration changes be sent to your Config rule for evaluation. This first module's rule evaluates Security Groups. So select **Security Groups**.  When writing your own rules in the future, you may not care to have your Config rule evaluate every single resource of a particular type. AWS Config allows you to specify a Resource identifier if you'd like the rule to only execute for that single resource, and not all others of the same type.  For this workshop, leave *Resource identifier* blank.
+7. Choose **Save**
 
-7. AWS Config has the ability to pass configuration parameters to your Lambda function along with each invocation event.  They will arrive as key:value pairs within the event object as part of the *RuleParameters* attribute. For this first example rule, our Lambda function makes use of one parameter - **ipAddress**. This represents the single /32 IP address that as treated as the allowed IP address for SSH traffic to security groups in your account. So create one Rule parameter with the key **ipAddress** and a value of **1.1.1.1/32**. Keep in mind that the key name is case-sensitive.
-
-8. Choose **Save**
-
-9. Next, you will see your new Config Rule listed on the Config Rules dashboard.  Here you'll see a summary view of all existing Config rules within your account. Click on your rule, and you are taken to the dashboard for your new Config Rule, where you're able to edit it later, view the compliance status for each of the applicable resources, and more.  If your Lambda function was created successfully, you will be able to begin seeing any security groups that you have existing within this region appear and declared either Compliant or Noncompliant.
+8. Next, you will see your new Config Rule listed on the Config Rules dashboard.  Here you'll see a summary view of all existing Config rules within your account. Click on your rule, and you are taken to the dashboard for your new Config Rule, where you're able to edit it later, view the compliance status for each of the applicable resources, and more.  If your Lambda function was created successfully, you will be able to begin seeing any security groups that you have existing within this region appear and declared either Compliant or Noncompliant.
 
 ## Scoring!
 Click the appropriate button below to launch a CloudFormation stack in the region you've built your Config Rules in.  After launching, it will create all of the needed resources to validate and assess your
 
-After you have tested your Config Rule to your satisfaction for each module, you will find a button located within each Module directory to launch a CloudFormation stack.  This stack will create all of the resources required to test and assess the correctness of the Config Rule and Lambda function you've created.  Each assessment occurs as an **Execution** via an AWS Step Functions State Machine that is created by the CloudFormation template for that module.  Simply visit the Step Functions console in the region you have created the stack, select the created state machine for the module, and then choose **New Execution**.  For the Execution Input, visit the **Config Workshop Leaderboard** site, and after you have Created or Joined a team, choose the **Copy JWT** button.  Take what you've just copied and paste it to replace the default State Machine input for the state machine created for this Module.  Then choose **Start Execution**.
+After you have tested your Config Rule to your satisfaction for each module, you will find a button located within each Module directory to launch a CloudFormation stack.  This stack will create all of the resources required to test and assess the correctness of the Config Rule and Lambda function you've created.  Each assessment occurs as an **Execution** via an AWS Step Functions State Machine that is created by the CloudFormation template for that module.  Simply visit the Step Functions console in the region you have created the stack, select the created state machine for the module, and then choose **New Execution**:
+![New Exexcution](/Images/New-Execution.png)
 
-The execution will take 5-10 minutes to complete, and it's path through the state machine will indicate if your Config Rule has met the requirements and if any points have been scored for your team!  You can only get credit for the same rule once, as an individual team member.  But your team *will* receive points for the same rule as different team members complete each Module - **so help your team members complete their rules as well!**
+For the Execution Input, visit the [**Config Workshop Leaderboard**](https://amzn.to/aws-config-rules-workshop/), and after you have Created or Joined a team, choose the **Copy JWT** button:
+![Copy JWT](/Images/Copy-JWT.png)
+
+Take what you've just copied and paste it to replace the default State Machine input for the state machine created for this Module:  
+![Pasted JWT](/Images/JWT-Pasted.png)
+
+Then choose **Start Execution**.
+
+The execution will take 5-10 minutes to complete, and it's path through the state machine will indicate if your Config Rule has met the requirements and if any points have been scored for your team!  
+![State Machine Step Graph](/Images/SFN-Execution-Map.png)
+
+You can only get credit for the same rule once, as an individual team member.  But your team *will* receive points for the same rule as different team members complete each Module - **so help your team members complete their rules as well!**
 
 Region| Launch
 ------|-----
