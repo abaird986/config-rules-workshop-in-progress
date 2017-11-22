@@ -1,6 +1,6 @@
 # AWS Config Rules Workshop
 
-[Config Rules RULES](/Images/Config-Header.png)
+![Config Rules RULES](/Images/Config-Header.png)
 
 ## View the Leaderboard - https://amzn.to/aws-config-rules-workshop
 
@@ -35,15 +35,16 @@ Within each Workshop Module, you will find the following 3 files:
 
 ### Testing Your Rule (earning points!)
 After you have tested your Config Rule to your satisfaction for each module, you will find a button located within each Module directory to launch a CloudFormation stack.  This stack will create all of the resources required to test and assess the correctness of the Config Rule and Lambda function you've created.  Each assessment occurs as an **Execution** via an AWS Step Functions State Machine that is created by the CloudFormation template for that module.  Simply visit the [Step Functions console](https://eu-west-1.console.aws.amazon.com/states/), select the created state machine for the module, and then choose **New Execution**:  
-[New Exexcution](/Images/New-Execution.png)
+![New Exexcution](/Images/New-Execution.png)
 
 For the *Execution Input*, visit the [**Config Workshop Leaderboard**](https://amzn.to/aws-config-rules-workshop/), and after you have **Created or Joined a Team**, choose the **Copy JWT** button:  
-[Copy JWT](/Images/Copy-JWT.png)
+![Copy JWT](/Images/Copy-JWT.png)
 
-If you do not join a team on the Leaderboard, you will not receive points! Take your copied JWT input, and replace the default State Machine input with all that's been copied as the input to the State Machine Execution.
+If you do not join a team on the Leaderboard, you will not receive points! Take your copied JWT input, and replace the default State Machine input with all that's been copied as the input to the State Machine Execution:
+![Pasted JWT](/Images/JWT-Pasted.png)
 
 The execution will take 5-10 minutes to complete, and it's path through the state machine will indicate if your Config Rule has met the requirements and if any points have been scored for your team!  A completed execution will look like the below (failure will result in a red failure state):
-[State Machine Step Graph](/Images/SFN-Execution-Map.png)
+![State Machine Step Graph](/Images/SFN-Execution-Map.png)
 
 Each individual on your team can only receive points once for each rule.  But your team *can* receive points for the same rule as different team members complete each Module - **so help your team members complete their rules as well!**
 
