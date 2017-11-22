@@ -30,7 +30,7 @@ Each Config rule that you create and manage is an AWS Lambda function that conta
 Next we will enable AWS Config and create your first Config Rule so that this Lambda function is executed whenever configuration changes occur for your security groups.
 
 ## Enabling AWS Config
-If you have never used the AWS Config Service, you will first need to enable it.  Follow [these steps to enable AWS Config](http://docs.aws.amazon.com/config/latest/developerguide/gs-console.html), be sure you enable config within the appropriate region for this workshop: [eu-west-1/Ireland](https://eu-west-1.console.aws.amazon.com/lambda/home?region=eu-west-1).
+If you have never used the AWS Config Service, you will first need to enable it.  Follow [these steps to enable AWS Config](http://docs.aws.amazon.com/config/latest/developerguide/gs-console.html), be sure you enable config within the appropriate region for this workshop: [eu-west-1/Ireland](https://eu-west-1.console.aws.amazon.com/config/home?region=eu-west-1).
 
 ## Creating a Config Rule
 1. On the AWS Config console home page, choose **Rules**, then **+Add Rule**:
