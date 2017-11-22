@@ -57,18 +57,18 @@ If you have never used the AWS Config Service, you will first need to enable it.
 Click the appropriate button below to launch a CloudFormation stack in the region you've built your Config Rules in.  After launching, it will create all of the needed resources to validate and assess your
 
 After you have tested your Config Rule to your satisfaction for each module, you will find a button located within each Module directory to launch a CloudFormation stack.  This stack will create all of the resources required to test and assess the correctness of the Config Rule and Lambda function you've created.  Each assessment occurs as an **Execution** via an AWS Step Functions State Machine that is created by the CloudFormation template for that module.  Simply visit the Step Functions console in the region you have created the stack, select the created state machine for the module, and then choose **New Execution**:
-![New Exexcution](Images/New-Execution.png)
+![New Exexcution](/Images/New-Execution.png)
 
 For the Execution Input, visit the [**Config Workshop Leaderboard**](https://amzn.to/aws-config-rules-workshop/), and after you have Created or Joined a team, choose the **Copy JWT** button:
-![Copy JWT](Images/Copy-JWT.png)
+![Copy JWT](/Images/Copy-JWT.png)
 
 Take what you've just copied and paste it to replace the default State Machine input for the state machine created for this Module:  
-![Pasted JWT](Images/JWT-Pasted.png)
+![Pasted JWT](/Images/JWT-Pasted.png)
 
 Then choose **Start Execution**.
 
 The execution will take 5-10 minutes to complete, and it's path through the state machine will indicate if your Config Rule has met the requirements and if any points have been scored for your team!  
-![State Machine Step Graph](Images/SFN-Execution-Map.png)
+![State Machine Step Graph](/Images/SFN-Execution-Map.png)
 
 You can only get credit for the same rule once, as an individual team member.  But your team *will* receive points for the same rule as different team members complete each Module - **so help your team members complete their rules as well!**
 
