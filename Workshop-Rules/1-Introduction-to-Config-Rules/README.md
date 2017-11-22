@@ -54,24 +54,29 @@ If you have never used the AWS Config Service, you will first need to enable it.
 8. Next, you will see your new Config Rule listed on the Config Rules dashboard.  Here you'll see a summary view of all existing Config rules within your account. Click on your rule, and you are taken to the dashboard for your new Config Rule, where you're able to edit it later, view the compliance status for each of the applicable resources, and more.  If your Lambda function was created successfully, you will be able to begin seeing any security groups that you have existing within this region appear and declared either Compliant or Noncompliant.
 
 ## Scoring!
-Click the appropriate button below to launch a CloudFormation stack in the region you've built your Config Rules in.  After launching, it will create all of the needed resources to validate and assess your
+After you have tested your Config Rule to your satisfaction for each module, you will find a button located within each Module directory, to launch a CloudFormation stack.  This stack will create all of the resources required to test and assess the correctness of the Config Rule and Lambda function you've created.  Each assessment occurs as an **Execution** via an AWS Step Functions State Machine that is created by the CloudFormation template for that module.  
 
-After you have tested your Config Rule to your satisfaction for each module, you will find a button located within each Module directory to launch a CloudFormation stack.  This stack will create all of the resources required to test and assess the correctness of the Config Rule and Lambda function you've created.  Each assessment occurs as an **Execution** via an AWS Step Functions State Machine that is created by the CloudFormation template for that module.  Simply visit the Step Functions console in the region you have created the stack, select the created state machine for the module, and then choose **New Execution**:
-![New Exexcution](/Images/New-Execution.png)
+1. Click the button below to launch the template, leaving all settings as default (checking boxes on the **Review** page to acknowledge the stack will create IAM resources, and choosing the **Create Change Set** button so that the Serverless Application Model template will be transformed into a CloudFormation template):
+![Cloudformation Choices](Images/Cloudformation.png)
 
-For the Execution Input, visit the [**Config Workshop Leaderboard**](https://amzn.to/aws-config-rules-workshop/), and after you have Created or Joined a team, choose the **Copy JWT** button:
-![Copy JWT](/Images/Copy-JWT.png)
-
-Take what you've just copied and paste it to replace the default State Machine input for the state machine created for this Module:  
-![Pasted JWT](/Images/JWT-Pasted.png)
-
-Then choose **Start Execution**.
-
-The execution will take 5-10 minutes to complete, and it's path through the state machine will indicate if your Config Rule has met the requirements and if any points have been scored for your team!  
-![State Machine Step Graph](/Images/SFN-Execution-Map.png)
-
-You can only get credit for the same rule once, as an individual team member.  But your team *will* receive points for the same rule as different team members complete each Module - **so help your team members complete their rules as well!**
 
 Region| Launch
 ------|-----
 EU (Ireland) | [![Launch Module 1 in eu-west-1](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=ConfigRules-Module-1-Security-Groups&templateURL=https://s3.amazonaws.com/config-rules-workshop-eu-west-1/module-1/template.yml)
+
+2. After the stack has been created, visit the Step Functions console in the region you have created the stack, select the created state machine for the module, and then choose **New Execution**:
+![New Exexcution](/Images/New-Execution.png)
+
+3. For the Execution Input, visit the [**Config Workshop Leaderboard**](https://amzn.to/aws-config-rules-workshop/), and after you have Created or Joined a team, choose the **Copy JWT** button:
+![Copy JWT](/Images/Copy-JWT.png)
+
+4. Take what you've just copied and paste it to replace the default State Machine input for the state machine created for this Module:  
+![Pasted JWT](/Images/JWT-Pasted.png)
+
+5. Then choose **Start Execution**.
+
+6. The execution will take 5-10 minutes to complete, and it's path through the state machine will indicate if your Config Rule has met the requirements and if any points have been scored for your team!  
+![State Machine Step Graph](/Images/SFN-Execution-Map.png)
+
+### Earn Points Together
+You can only get credit for the same rule once, as an individual team member.  But your team *will* receive points for the same rule as different team members complete each Module - **so help your team members complete their rules as well!**
