@@ -37,17 +37,17 @@ If you have never used the AWS Config Service, you will first need to enable it 
 ![Add Rule](/Images/Add-Rule.png)
 
 2. Here, you'll see many available Config Rules that AWS has created and will manage for you, called Managed  Rules. For this workshop we will be creating Custom Rules.  Choose **+Custom Rule**:
-![Add Rule](/Images/Add-Custom-Rule.png)
+![Add Custom Rule](/Images/Add-Custom-Rule.png)
 
 3. Name your Config Rule something descriptive like, *SecurityGroupSSHWhitelistRule*, and give it a description.  For **Lambda Function ARN**, copy the ARN that is visible within the Lambda console for the Lambda function you created above, and paste the full ARN here. It should have the form of *arn:aws:lambda:aws-region-1:xxxxxxxxxxxx:function:FUNCTION_NAME*:
-![Add Rule](/Images/Rule-Basic-Config.png)
+![Rule Config](/Images/Rule-Basic-Config.png)
 
 4. Next, you have the option of either having this rule be evaluated as changes occur to AWS resources (*Configuration changes*) or on a schedule (*Periodic*).  For this workshop, all of the rules with be triggered by **Configuration changes**, so choose that option.  For configuration change triggered rules, you have the ability to scope event triggers to either resources of a particular type change (*Resources*), when any resources that share a specified tag change (*Tags*) or when AWS Config records the change of any resource (*Any*). For this workshop, our scope will be **Resources**.
 5. You then will select for which type of AWS resources should the configuration changes be sent to your Config rule for evaluation. This first module's rule evaluates Security Groups. So select **Security Groups**.  When writing your own rules in the future, you may not care to have your Config rule evaluate every single resource of a particular type. AWS Config allows you to specify a Resource identifier if you'd like the rule to only execute for that single resource, and not all others of the same type.  For this workshop, leave *Resource identifier* blank:
-![Add Rule](/Images/Rule-Trigger-Config.png)
+![Rule Trigger](/Images/Rule-Trigger-Config.png)
 
 6. AWS Config has the ability to pass configuration parameters to your Lambda function along with each invocation event.  They will arrive as key:value pairs within the event object as part of the *RuleParameters* attribute. For this first example rule, our Lambda function makes use of one parameter - **ipAddress**. This represents the single /32 IP address that as treated as the allowed IP address for SSH traffic to security groups in your account. So create one Rule parameter with the key **ipAddress** and a value of **1.1.1.1/32**. Keep in mind that the key name is case-sensitive:
-![Add Rule](/Images/Rule-Parameters.png)
+![Rule Parameters](/Images/Rule-Parameters.png)
 
 7. Choose **Save**
 
