@@ -67,7 +67,7 @@ EU (Ireland) | [![Launch Module 1 in eu-west-1](http://docs.aws.amazon.com/AWSCl
 2. After the stack has been created, visit the Step Functions console in the region you have created the stack, select the created state machine for the module, and then choose **New Execution**:
 ![New Exexcution](/Images/New-Execution.png)
 
-3. For the Execution Input, visit the [**Config Workshop Leaderboard**](https://amzn.to/aws-config-rules-workshop/), and after you have Created or Joined a team, choose the **Copy JWT** button:
+3. For the Execution Input, visit the [**Config Workshop Leaderboard**](https://amzn.to/aws-config-rules-workshop), and after you have Created or Joined a team, choose the **Copy JWT** button:
 ![Copy JWT](/Images/Copy-JWT.png)
 
 4. Take what you've just copied and paste it to replace the default State Machine input for the state machine created for this Module:  
